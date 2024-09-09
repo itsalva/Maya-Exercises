@@ -27,6 +27,10 @@ warning=$(awk "BEGIN {print $wa / 100}")
 CRITICAL_MEMORY=$(awk "BEGIN {print $TOTAL_MEMORY * $critical}")
 WARNING_MEMORY=$(awk "BEGIN {print $TOTAL_MEMORY * $warning}")
 
+# Converts memory from float to int for comparison below
+CRITICAL_MEMORY=$(printf "%.0f" "$CRITICAL_MEMORY")
+WARNING_MEMORY=$(printf "%.0f" "$WARNING_MEMORY")
+
 if [ $CURRENT_MEMORY -gt $CRITICAL_MEMORY ]; then
     echo "Memory is above critical threshold."
     exit 2
