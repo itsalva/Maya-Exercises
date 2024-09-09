@@ -40,7 +40,7 @@ class mypuppet {
     # Create soft link for memory_check.sh called my_memory_check.sh
     file { '/home/monitor/src/my_memory_check.sh':
         ensure => 'link',
-        target => 'home/monitor/scripts/memory_check.sh',
+        target => 'home/monitor/scripts/memory_check.sh -c 90 -w 60 -e email@mine.com',
     }
 
     # Cron job to run my_memory_check.sh every 10 minutes
