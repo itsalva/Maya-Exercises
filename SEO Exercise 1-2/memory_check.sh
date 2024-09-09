@@ -1,6 +1,6 @@
 #!/bin/bash
 TOTAL_MEMORY=$( free | grep Mem: | awk '{ print $2 }' )
-TOTAL_MEMORY=$( free | grep Mem: | awk '{ print $3 }' )
+CURRENT_MEMORY=$( free | grep Mem: | awk '{ print $3 }' )
 
 while getopts c:w:e: arg; do
     case $arg in
