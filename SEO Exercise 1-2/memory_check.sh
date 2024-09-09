@@ -33,6 +33,12 @@ WARNING_MEMORY=$(printf "%.0f" "$WARNING_MEMORY")
 
 if [ $CURRENT_MEMORY -gt $CRITICAL_MEMORY ]; then
     echo "Memory is above critical threshold."
+    # Runs ps command filtered by top memory usage
+    ERROR_LOG=$(ps -eo pid,cmd,%mem --sort=-%mem | head)
+    # Gets current time and date for email subject
+    timestamp=$(date +"%Y%m%d %H:%M Memory check - critical")
+    # Sends email report to -e email
+    echo "$ERROR_LOG" | mailx -s "$timestamp" "$ea"
     exit 2
 fi
 
